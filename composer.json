@@ -1,13 +1,13 @@
 {
-    "name": "snscripts/itc-reporter",
+    "name": "maxmilia/itc-reporter",
     "description": "PHP package for downloading stats from iTunes Connect - Replacement for Apples Java based Reporter.jar",
     "keywords": ["iTunes", "Connect", "Reporter.jar", "App Stats"],
-    "homepage": "https://github.com/mikebarlow/itc-reporter",
+    "homepage": "https://github.com/maxmilia/itc-reporter",
     "license": "MIT",
     "authors": [
         {
-            "name": "Mike Barlow",
-            "email": "mike@mikebarlow.co.uk",
+            "name": "Maxmilia Zhang",
+            "email": "maxmilia.zhang@gmail.com",
             "role": "Developer"
         }
     ],

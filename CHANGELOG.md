@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.0.0] - 2018-08-28
+
+* [Upgrade] Upgrade Api Version to 2.2 and add generate endpoints
+
 ## [2.0.0] - 2017-06-29
 
 * [Update] Amended login for the ITC Reporter to use access tokens rather than email / password
