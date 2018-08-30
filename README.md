@@ -1,11 +1,10 @@
 # iTunes Connect Reporter (ITC Reporter)
 
-[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](https://github.com/maxmilia/itc-reporter/blob/master/LICENSE)
-
-## Importance!!!
-
-This repo is ONLY for my personal use. Does not have fully Unit Test.
-Highly recomand snscripts's repo.
+[![Author](http://img.shields.io/badge/author-@mikebarlow-red.svg?style=flat-square)](https://twitter.com/mikebarlow)
+[![Source Code](http://img.shields.io/badge/source-mikebarlow/itc--reporter-brightgreen.svg?style=flat-square)](https://github.com/mikebarlow/itc-reporter)
+[![Latest Version](https://img.shields.io/github/release/mikebarlow/itc-reporter.svg?style=flat-square)](https://github.com/mikebarlow/itc-reporter/releases)
+[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](https://github.com/mikebarlow/itc-reporter/blob/master/LICENSE)
+[![Build Status](https://img.shields.io/travis/mikebarlow/itc-reporter/master.svg?style=flat-square)](https://travis-ci.org/mikebarlow/itc-reporter)
 
 ## Introduction
 
@@ -36,7 +35,7 @@ And the following if you wish to run in dev mode and run tests.
 
 Simplest installation is via composer.
 
-	composer require maxmilia/itc-reporter 3.*
+	composer require snscripts/itc-reporter 2.*
 
 or adding to your projects `composer.json` file.
 
@@ -349,8 +348,11 @@ If no action has been run, the result will return a `null` value.
 
 ## Changelog
 
-You can view the changelog [HERE](https://github.com/maxmilia/itc-reporter/blob/master/CHANGELOG.md)
+You can view the changelog [HERE](https://github.com/mikebarlow/itc-reporter/blob/master/CHANGELOG.md)
 
+## Contributing
+
+Please see [CONTRIBUTING](https://github.com/mikebarlow/itc-reporter/blob/master/CONTRIBUTING.md) for details.
 
 ## License
 

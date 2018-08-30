@@ -10,20 +10,18 @@ class Reporter
     const
         SALESURL   = 'https://reportingitc-reporter.apple.com/reportservice/sales/v1',
         FINANCEURL = 'https://reportingitc-reporter.apple.com/reportservice/finance/v1',
-        VERSION    = '2.2',
+        VERSION    = '2.1',
         MODE       = 'Robot.XML';
 
     protected $userid;
     protected $password;
     protected $access_token;
     protected $account = 'None';
-    protected $requestid;
     protected $Guzzle;
     protected $responses = [
         'Sales.getAccounts'            => '\Snscripts\ITCReporter\Responses\SalesGetAccounts',
         'Sales.getVendors'             => '\Snscripts\ITCReporter\Responses\SalesGetVendors',
         'Sales.getReport'              => '\Snscripts\ITCReporter\Responses\SalesGetReport',
-        'Sales.getReport'              => '\Snscripts\ITCReporter\Responses\SalesGenerateToken',
         'Finance.getAccounts'          => '\Snscripts\ITCReporter\Responses\FinanceGetAccounts',
         'Finance.getVendorsAndRegions' => '\Snscripts\ITCReporter\Responses\FinanceGetVendors',
         'Finance.getReport'            => '\Snscripts\ITCReporter\Responses\FinanceGetReport'
@@ -223,23 +221,12 @@ class Reporter
             throw new \BadFunctionCallException('A valid action must be passed to Reporter::buildJsonRequest()');
         }
 
-        if (!empty($this->password)) {
-            $json = [
-                'account' => (string)$this->account,
-                'version' => self::VERSION,
-                'password' => $this->password,
-                'userid' => $this->userid,
-                'mode'         => self::MODE
-            ];
-        } else {
-            $json = [
-                'accesstoken' => $this->access_token,
-                'version'      => self::VERSION,
-                'mode'         => self::MODE,
-                'account'      => (string)$this->account
-            ];
-        }
-
+        $json = [
+            'accesstoken' => $this->access_token,
+            'version'      => self::VERSION,
+            'mode'         => self::MODE,
+            'account'      => (string)$this->account
+        ];
 
         // build up the action and parameters we actually want to perform
         $queryInput = [
@@ -261,20 +248,8 @@ class Reporter
      * @param string $jsonRequest
      * @return Result
      */
-    public function performRequest($endpoint, $jsonRequest, $requestId='')
+    public function performRequest($endpoint, $jsonRequest)
     {
-        if ($requestId) {
-            $form_params = [
-                'jsonRequest' => $jsonRequest,
-                'isExistingToken' => 'Y',
-                'requestId' => $requestId
-            ];
-        } else {
-            $form_params = [
-                'jsonRequest' => $jsonRequest
-            ];
-        }
-
         try {
             $Response = $this->Guzzle->request(
                 'POST',
@@ -392,51 +367,5 @@ class Reporter
     public function getAccessToken()
     {
         return $this->access_token;
-    }
-
-    /**
-     * generate new access token
-     * 
-     * @return string $access_token
-     */
-    public function generateToken()
-    {
-        $json = $this->buildJsonRequest('Sales.generateToken');
-
-        $this->lastResult = $Result = $this->performRequest(self::SALESURL, $json);
-
-        if ($Result->isSuccess()) {
-            $this->requestid = $serviceRequestId = $this->processResponse(
-                'Sales.generateToken',
-                $Result->getExtra('Response')
-            );
-
-            $json = $this->buildJsonRequest('Sales.generateToken');
-
-            $this->lastResult = $Result = $this->performRequest(self::SALESURL, $json, $this->requestid);
-
-            if ($Result->isSuccess()) {
-                return $this->processResponse(
-                    'Sales.generateToken',
-                    $Result->getExtra('Response')
-                );
-            }
-        }
-
-        return '';
-    }
-
-    /**
-     * set userid and password to generate access token
-     * 
-     * @param string $userId
-     * @param string $password
-     * @return Reporter $this
-     */
-    public function setOauthInfo($userId, $password)
-    {
-        $this->userid = $userId;
-        $this->password = $password;
-        return $this;
     }
 }
